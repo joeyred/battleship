@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import Grid from '../components/Grid';
 import Ship from '../components/Ship';
 
 export default class GameBoard extends Component {
@@ -54,18 +55,32 @@ export default class GameBoard extends Component {
         cellSize
       }
     }
+    // return (
+    //   <div className="gameboard" ref="gameboard">
+    //     <div className="enemy-grid" style={{height: this.state.width, width: this.state.width}}></div>
+    //     <div className="player-grid" style={{height: this.state.width, width: this.state.width}}>
+    //       <Ship
+    //         name={shipProps.carrier.name}
+    //         size={shipProps.carrier.size}
+    //         direction={shipProps.carrier.direction}
+    //         damage={shipProps.carrier.damage}
+    //         locations={shipProps.carrier.locations}
+    //         cellSize={shipProps.carrier.cellSize}
+    //       />
+    //     </div>
+    //   </div>
+    // );
     return (
       <div className="gameboard" ref="gameboard">
         <div className="enemy-grid" style={{height: this.state.width, width: this.state.width}}></div>
         <div className="player-grid" style={{height: this.state.width, width: this.state.width}}>
-          <Ship
-            name={shipProps.carrier.name}
-            size={shipProps.carrier.size}
-            direction={shipProps.carrier.direction}
-            damage={shipProps.carrier.damage}
-            locations={shipProps.carrier.locations}
-            cellSize={shipProps.carrier.cellSize}
-          />
+          <Grid dimensions={[10, 10]} height={this.state.width} width={this.state.width}>
+            <Ship
+              name={shipProps.carrier.name}
+              damage={shipProps.carrier.damage}
+              locations={shipProps.carrier.locations}
+            />
+          </Grid>
         </div>
       </div>
     );
