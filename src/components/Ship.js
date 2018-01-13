@@ -10,7 +10,7 @@ const Ship = (props) => {
     gridArea: gridProps
   };
   return (
-    <div className="ship" style={style}></div>
+    <div className={`ship ${props.name}`} style={style}></div>
   );
 };
 
