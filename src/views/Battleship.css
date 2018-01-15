@@ -30,12 +30,12 @@
 }
 
 .player-grid {
-  position: relative;
+  /* position: relative; */
   background: rgba(255, 255, 255, 0.1);
 }
 
 .ship {
-  position: absolute;
+  /* position: absolute; */
   background: rgba(255, 255, 255, 0.4);
 }
 
