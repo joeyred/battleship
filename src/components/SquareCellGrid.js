@@ -1,13 +1,38 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default class Grid extends Component {
+export default class SquareCellGrid extends Component {
   static propTypes = {
     dimensions: PropTypes.array.isReq,
-    height: PropTypes.number,
-    width: PropTypes.number
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: null
+    };
   }
 
+  measure() {
+    const {clientWidth} = this.refs.squareCellGrid;
+
+    this.setState({
+      width: clientWidth
+    });
+  }
+
+  componentDidMount() {
+    this.measure();
+  }
+
+  componentDidUpdate() {
+    this.measure();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state.width !== nextState.width
+    );
+  }
   getGridTemplateValue(quantity) {
     let valueArray = [];
     for (let i = 0; i < quantity; i++) {
@@ -20,11 +45,10 @@ export default class Grid extends Component {
       display: 'grid',
       gridTemplateColumns: this.getGridTemplateValue(this.props.dimensions[0]),
       gridTemplateRows: this.getGridTemplateValue(this.props.dimensions[1]),
-      height: this.props.height,
-      width: this.props.width
+      height: this.state.width,
     }
     return (
-      <div className="grid" style={cssGridProps}>
+      <div className="grid" ref="squareCellGrid" style={cssGridProps}>
         {this.props.children}
       </div>
     );
