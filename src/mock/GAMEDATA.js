@@ -37,9 +37,9 @@ const GAMEDATA = {
           size: 3,
           direction: '',
           locations: [
-            [3, 3],
-            [3, 4],
-            [3, 5]
+            [4, 2],
+            [4, 3],
+            [4, 4]
           ],
           damage: [],
           placed: true
@@ -49,9 +49,9 @@ const GAMEDATA = {
           size: 3,
           direction: '',
           locations: [
-            [1, 9],
+            [1, 7],
             [1, 8],
-            [1, 7]
+            [1, 9]
           ],
           damage: [],
           placed: true
