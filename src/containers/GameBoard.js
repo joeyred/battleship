@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Grid from '../components/Grid';
+// import Grid from '../components/Grid';
+import SquareCellGrid from '../components/SquareCellGrid';
 import Ship from '../components/Ship';
 
 export default class GameBoard extends Component {
@@ -37,8 +38,8 @@ export default class GameBoard extends Component {
     );
   }
   render() {
-    const cellSize = this.state.width / 10;
-    const style = {};
+    // const cellSize = this.state.width / 10;
+    // const style = {};
     let ships = [];
     for (let i = 0; i < this.props.player.ships.length; i++) {
       ships.push(
@@ -54,11 +55,13 @@ export default class GameBoard extends Component {
 
     return (
       <div className="gameboard" ref="gameboard">
-        <div className="enemy-grid" style={{height: this.state.width, width: this.state.width}}></div>
-        <div className="player-grid" style={{height: this.state.width, width: this.state.width}}>
-          <Grid dimensions={[10, 10]} height={this.state.width} width={this.state.width}>
+        <div className="enemy-grid">
+          <SquareCellGrid dimensions={[10, 10]}></SquareCellGrid>
+        </div>
+        <div className="player-grid">
+          <SquareCellGrid dimensions={[10, 10]}>
             {ships}
-          </Grid>
+          </SquareCellGrid>
         </div>
       </div>
     );
