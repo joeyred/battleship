@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './Battleship.css';
 
+import GAMEDATA from '../mock/GAMEDATA';
 // Containers
 import GameBoard from '../containers/GameBoard';
 // Components
@@ -32,7 +33,7 @@ export default class Battleship extends Component {
         </div>
 
 
-        <GameBoard />
+        <GameBoard player={GAMEDATA.players[0]} />
         {/* <div className="gameboard" ref="gameboard">
           <div className="crosshairs"></div>
           <div className="grid-interaction-layer"></div>

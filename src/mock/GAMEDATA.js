@@ -1,11 +1,11 @@
-export default const GAMEDATA = {
+const GAMEDATA = {
   players: [
     {
       ships: [
-        [
+        {
           name: 'Carrier',
           size: 5,
-          direction: ''
+          direction: '',
           locations: [
             [1, 1],
             [1, 2],
@@ -15,11 +15,11 @@ export default const GAMEDATA = {
           ],
           damage: [],
           placed: true
-        ],
-        [
+        },
+        {
           name: 'Battleship',
           size: 4,
-          direction: ''
+          direction: '',
           locations: [
             [3, 6],
             [4, 6],
@@ -31,35 +31,35 @@ export default const GAMEDATA = {
             [6, 6]
           ],
           placed: true
-        ],
-        [
+        },
+        {
           name: 'Cruiser',
           size: 3,
-          direction: ''
+          direction: '',
           locations: [
-            [3, 3],
-            [3, 4],
-            [3, 5]
+            [4, 2],
+            [4, 3],
+            [4, 4]
           ],
           damage: [],
           placed: true
-        ]
-        [
+        },
+        {
           name: 'Submarine',
           size: 3,
-          direction: ''
+          direction: '',
           locations: [
-            [1, 9],
+            [1, 7],
             [1, 8],
-            [1, 7]
+            [1, 9]
           ],
           damage: [],
           placed: true
-        ],
-        [
+        },
+        {
           name: 'Destroyer',
           size: 2,
-          direction: ''
+          direction: '',
           locations: [
             [6, 8],
             [7, 8]
@@ -68,8 +68,9 @@ export default const GAMEDATA = {
             [6, 8]
           ],
           placed: true
-        ]
+        }
       ]
     }
   ]
 };
+export default GAMEDATA;
