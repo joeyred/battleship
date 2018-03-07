@@ -33,7 +33,7 @@ export default class Battleship extends Component {
         </div>
 
 
-        <GameBoard player={GAMEDATA.players[0]} />
+        <GameBoard activePlayer={GAMEDATA.players[0]} inactivePlayer={GAMEDATA.players[1]} />
         {/* <div className="gameboard" ref="gameboard">
           <div className="crosshairs"></div>
           <div className="grid-interaction-layer"></div>
