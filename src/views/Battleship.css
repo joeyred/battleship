@@ -72,3 +72,19 @@
   color: white;
   letter-spacing: 2px;
 }
+
+.marker {
+  border-radius: 50%;
+  height: 80%;
+  width: 80%;
+  justify-self: center;
+  align-self: center;
+}
+
+.marker.hit {
+  background: red;
+}
+
+.marker.miss {
+  background: white;
+}
