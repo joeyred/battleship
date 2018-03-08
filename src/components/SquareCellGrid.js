@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class SquareCellGrid extends Component {
   static propTypes = {
-    dimensions: PropTypes.array.isReq,
+    dimensions: PropTypes.array.isRequired
   }
   constructor(props) {
     super(props);
@@ -24,15 +24,15 @@ export default class SquareCellGrid extends Component {
     this.measure();
   }
 
-  componentDidUpdate() {
-    this.measure();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.state.width !== nextState.width
-    );
-  }
+  // componentDidUpdate() {
+  //   this.measure();
+  // }
+  //
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return (
+  //     this.state.width !== nextState.width
+  //   );
+  // }
   getGridTemplateValue(quantity) {
     let valueArray = [];
     for (let i = 0; i < quantity; i++) {
