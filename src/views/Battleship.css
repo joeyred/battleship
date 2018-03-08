@@ -81,10 +81,10 @@
   align-self: center;
 }
 
-.marker.hit {
+.marker.hits {
   background: red;
 }
 
-.marker.miss {
+.marker.misses {
   background: white;
 }

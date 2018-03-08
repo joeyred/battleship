@@ -15,10 +15,10 @@ const Ship = (props) => {
 };
 
 Ship.propTypes = {
-  name: PropTypes.string.isReq,
+  name: PropTypes.string.isRequired,
   // size: PropTypes.number.isReq,
   // direction: PropTypes.oneOf(['vertical', 'horizontal']).isReq,
-  damage: PropTypes.array,
+  // damage: PropTypes.array,
   locations: PropTypes.array,
   // cellSize: PropTypes.number
 };
