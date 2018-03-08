@@ -1,56 +1,56 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './Battleship.css';
 
-import GAMEDATA from '../mock/GAMEDATA';
+
+// import GAMEDATA from '../mock/GAMEDATA';
 // Containers
 import GameBoard from '../containers/GameBoard';
 // Components
 
-export default class Battleship extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+// Our isolated game engine
+import BattleshipEngine from '../engine/battleship-engine';
+// var game = new BattleshipEngine();
 
+export default class Battleship extends Component {
+  constructor(props) {
+    super(props);
+    this.game = new BattleshipEngine();
+    this.state = {
+      gameState: this.game.gameState
+    };
+  }
+  componentDidMount() {
+    this.setState({gameState: this.game.gameState});
+  }
+  action(name, args) {
+    this.game.action(name, args);
+    this.setState({gameState: this.game.gameState});
+  }
   render() {
     // Player Interface
     // Player Grids
     // Interactive Grid
-    const cells = (quantity, keyPrefix) => {
-      let output = [];
-      for (let i = 0; i < quantity; i++) {
-        output.push(<div className="grid-cell" key={`${keyPrefix}-${i}`}></div>);
-      }
-      return output;
-    }
     return (
       <div className="battleship-game">
 
         <div className="message-modal"></div>
 
         <div className="player-controls">
-          <button className="button circular fire-button">FIRE</button>
+          <button
+            className="button circular fire-button"
+            onClick={() => this.action('fire', {coordinates: [1, 1]})}
+          >FIRE</button>
+          <button
+            onClick={()=> this.action('placeShip', {shipName: "carrier", startingCoordinates: [2, 3], orientation: 'vertical'})}
+            >Test</button>
         </div>
 
 
-        <GameBoard activePlayer={GAMEDATA.players[0]} inactivePlayer={GAMEDATA.players[1]} />
-        {/* <div className="gameboard" ref="gameboard">
-          <div className="crosshairs"></div>
-          <div className="grid-interaction-layer"></div>
-
-          <div className="enemy-grid">
-            <div className="grid">
-              {cells(100, 'enemy')}
-            </div>
-          </div>
-
-          <div className="player-grid">
-            <div className="grid">
-              {cells(100, 'player')}
-            </div>
-          </div>
-        </div> */}
-
+        <GameBoard
+          activePlayer={this.state.gameState.players[this.state.gameState.activePlayerIndex]}
+          inactivePlayer={this.state.gameState.players[this.state.gameState.inactivePlayerIndex]}
+        />
 
       </div>
     );

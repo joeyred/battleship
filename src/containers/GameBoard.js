@@ -7,109 +7,52 @@ import Marker from '../components/Marker';
 import Ship from '../components/Ship';
 
 export default class GameBoard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      width: null,
-      height: null,
-    };
+  static propTypes = {
+    activePlayer: PropTypes.object.isRequired,
+    inactivePlayer: PropTypes.object.isRequired
   }
-
-  measure() {
-    const {clientWidth, clientHeight} = this.refs.gameboard;
-
-    this.setState({
-      width: clientWidth,
-      height: clientHeight,
-    });
-  }
-
-  componentDidMount() {
-    this.measure();
-  }
-
-  componentDidUpdate() {
-    this.measure();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.state.width !== nextState.width ||
-      this.state.height !== nextState.height
-    );
+  renderMarkers(player, type) {
+    let markers = [];
+    for (let i = 0; i < player[type].length; i++) {
+      markers.push(
+        <Marker
+          location={player[type][i]}
+          classes={`marker ${type}`}
+          key={`marker-${type}-${i}`}
+        />
+      );
+    }
+    return markers;
   }
   render() {
-    // const cellSize = this.state.width / 10;
-    // const style = {};
-    //
-    let playerGrid = {
-      hits: [],
-      misses: []
-    }
-    for (let i = 0; i < this.props.activePlayer.hits.length; i++) {
-      playerGrid.hits.push(
-        <Marker
-          location={this.props.activePlayer.hits[i]}
-          classes="marker hit"
-        />
-      );
-    }
-    for (let i = 0; i < this.props.activePlayer.misses.length; i++) {
-      playerGrid.misses.push(
-        <Marker
-          location={this.props.activePlayer.misses[i]}
-          classes="marker miss"
-        />
-      );
-    }
-
-    let enemyGrid = {
-      hits: [],
-      misses: []
-    }
-    for (let i = 0; i < this.props.inactivePlayer.hits.length; i++) {
-      enemyGrid.hits.push(
-        <Marker
-          location={this.props.activePlayer.hits[i]}
-          classes="marker hit"
-        />
-      );
-    }
-    for (let i = 0; i < this.props.inactivePlayer.misses.length; i++) {
-      enemyGrid.misses.push(
-        <Marker
-          location={this.props.inactivePlayer.misses[i]}
-          classes="marker miss"
-        />
-      );
-    }
 
     let ships = [];
     for (let i = 0; i < this.props.activePlayer.ships.length; i++) {
-      ships.push(
-        <Ship
-          name={this.props.activePlayer.ships[i].name}
-          damage={this.props.activePlayer.ships[i].damage}
-          locations={this.props.activePlayer.ships[i].locations}
-        />
-      );
+      if (this.props.activePlayer.ships[i].placed === true) {
+        ships.push(
+          <Ship
+            name={this.props.activePlayer.ships[i].name}
+            damage={this.props.activePlayer.ships[i].damage}
+            locations={this.props.activePlayer.ships[i].locations}
+            key={this.props.activePlayer.ships[i].name}
+          />
+        );
+      }
     }
-
-
 
     return (
       <div className="gameboard" ref="gameboard">
         <div className="enemy-grid">
           <SquareCellGrid dimensions={[10, 10]}>
-            {enemyGrid.hits}
-            {enemyGrid.misses}
+            {this.renderMarkers(this.props.inactivePlayer, 'hits')}
+            {this.renderMarkers(this.props.inactivePlayer, 'misses')}
           </SquareCellGrid>
         </div>
         <div className="player-grid">
           <SquareCellGrid dimensions={[10, 10]}>
             {ships}
-            {playerGrid.hits}
-            {playerGrid.misses}
+            {this.renderMarkers(this.props.activePlayer, 'hits')}
+            {this.renderMarkers(this.props.activePlayer, 'misses')}
           </SquareCellGrid>
         </div>
       </div>
