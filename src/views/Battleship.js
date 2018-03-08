@@ -6,6 +6,7 @@ import './Battleship.css';
 // import GAMEDATA from '../mock/GAMEDATA';
 // Containers
 import GameBoard from '../containers/GameBoard';
+import InteractiveBoard from '../containers/InteractiveBoard';
 // Components
 
 // Our isolated game engine
@@ -17,15 +18,27 @@ export default class Battleship extends Component {
     super(props);
     this.game = new BattleshipEngine();
     this.state = {
-      gameState: this.game.gameState
+      gameState: this.game.gameState,
+      gameStage: null,
+      selectedShip: {
+        name: null,
+        size: null,
+        orientation: null
+      },
+      selectedCoordinates: null
     };
   }
   componentDidMount() {
-    this.setState({gameState: this.game.gameState});
+    this.setState({
+      gameState: this.game.gameState
+    });
   }
   action(name, args) {
     this.game.action(name, args);
     this.setState({gameState: this.game.gameState});
+  }
+  getSelectedCoordinates = (coordinates) => {
+    this.setState({selectedCoordinates: coordinates});
   }
   render() {
     // Player Interface
@@ -50,6 +63,12 @@ export default class Battleship extends Component {
         <GameBoard
           activePlayer={this.state.gameState.players[this.state.gameState.activePlayerIndex]}
           inactivePlayer={this.state.gameState.players[this.state.gameState.inactivePlayerIndex]}
+        />
+
+        <InteractiveBoard
+          handleSelection={this.getSelectedCoordinates}
+          gameStage="setup"
+          selectedShip={{name: 'carrier', size: 5, orientation: 'horizontal'}}
         />
 
       </div>
