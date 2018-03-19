@@ -43,13 +43,14 @@ export default class InteractiveBoard extends Component {
   }
   onHover(coordinates) {
     const {size, orientation} = this.props.selectedShip;
+    const highlightedSpaces = generateLocations(
+      coordinates,
+      size,
+      orientation
+    );
     this.setState({
-      highlightedSpaces: generateLocations(
-        coordinates,
-        size,
-        orientation
-      ),
-      gridButtons: this.generateButtons()
+      highlightedSpaces
+      // gridButtons: this.generateButtons()
     });
   }
   isHighlighted(coordinates) {

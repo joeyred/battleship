@@ -7,7 +7,7 @@ function locationsToCssGrid(locations) {
   // This handles things if just an array with one
   // set of coordinates are passed
   if (typeof locations[0] === 'number') {
-    console.log('one location');
+    // console.log('one location');
     xStart = locations[0] + 1;
     xEnd = locations[0] + 2;
     yStart = locations[1] + 1;
@@ -15,7 +15,7 @@ function locationsToCssGrid(locations) {
   }
   // handles an array of arrays that contain coordinates
   if (typeof locations[0] === 'object') {
-    console.log('lots of locations');
+    // console.log('lots of locations');
     xStart = locations[0][0] + 1;
     yStart = locations[0][1] + 1;
 
