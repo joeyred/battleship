@@ -48,7 +48,7 @@ export default class SquareCellGrid extends Component {
       height: this.state.width,
     }
     return (
-      <div className="grid" ref="squareCellGrid" style={cssGridProps}>
+      <div className="grid" ref="squareCellGrid" style={{...cssGridProps, ...this.props.style}}>
         {this.props.children}
       </div>
     );

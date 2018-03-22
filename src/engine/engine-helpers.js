@@ -51,6 +51,7 @@ export function generateLocations(startingCoordinates, size, orientation) {
     if (i === 0) {
       locations[i] = startingCoordinates;
     } else {
+      // console.log(`iteration ${i}`);
       previousLocation = locations[i - 1];
       x = previousLocation[0];
       y = previousLocation[1];
