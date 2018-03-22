@@ -16,4 +16,23 @@ export default class Button extends Component {
      */
     onClick: PropTypes.func
   }
+  clickHandler = (e) => {
+    if (this.props.disabled) {
+      e.preventDefault();
+      return;
+    }
+    this.props.onClick();
+  }
+  render() {
+    const disabled = this.props.disabled || false;
+    return (
+      <button
+        className={this.props.classes}
+        disabled={disabled}
+        onClick={this.clickHandler}
+        >
+        {this.props.children}
+      </button>
+    );
+  }
 }
