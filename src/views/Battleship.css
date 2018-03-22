@@ -17,9 +17,9 @@
   grid-row: 1 / 4;
   display: flex;
   flex-flow: row nowrap;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
-.Interactive-board .grid {
+.Interactive-board .button-grid {
   flex: 0 0 100%;
 }
 .Interactive-board
