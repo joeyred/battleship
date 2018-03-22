@@ -39,21 +39,6 @@ export default class Battleship extends Component {
     this.game.action(name, args);
     this.setState({gameState: this.game.gameState});
   }
-  // TODO fix this weird method. it works, but it makes me super uncomfortable.
-  //      i need an adult.
-  getSelectedCoordinates = (coordinates) => {
-    this.setState({selectedCoordinates: coordinates});
-    if (this.state.gameStage === 'setup' && this.state.selectedShip.name !== null) {
-      this.action(
-        'placeShip',
-        {
-          shipName:   this.state.selectedShip.name,
-          startingCoordinates: coordinates,
-          orientation: this.state.selectedShip.orientation
-        }
-      );
-    }
-  }
   onCoordinateSelection = (coordinates) => {
     this.setState({selectedCoordinates: coordinates});
     if (this.state.gameStage === 'setup' && this.state.selectedShip.name !== null) {
