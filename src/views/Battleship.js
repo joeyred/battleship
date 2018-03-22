@@ -26,7 +26,8 @@ export default class Battleship extends Component {
         size: null,
         orientation: null
       },
-      selectedCoordinates: null
+      selectedCoordinates: null,
+      hoveredCoordinates: null
     };
   }
   componentDidMount() {
@@ -52,6 +53,22 @@ export default class Battleship extends Component {
         }
       );
     }
+  }
+  onCoordinateSelection = (coordinates) => {
+    this.setState({selectedCoordinates: coordinates});
+    if (this.state.gameStage === 'setup' && this.state.selectedShip.name !== null) {
+      this.action(
+        'placeShip',
+        {
+          shipName:   this.state.selectedShip.name,
+          startingCoordinates: coordinates,
+          orientation: this.state.selectedShip.orientation
+        }
+      );
+    }
+  }
+  onCoordinateHover = (coordinates) => {
+    this.setState({hoveredCoordinates: coordinates});
   }
   selectShip = (index) => {
     const {ships} = this.state.gameState.players[this.state.gameState.activePlayerIndex];
@@ -95,6 +112,7 @@ export default class Battleship extends Component {
       rotateHandler={this.rotateShip}
       readyToPlay={this.readyToPlay}
     /> : null;
+
     return (
       <div className="battleship-game">
 
@@ -114,12 +132,15 @@ export default class Battleship extends Component {
         <GameBoard
           activePlayer={this.state.gameState.players[this.state.gameState.activePlayerIndex]}
           inactivePlayer={this.state.gameState.players[this.state.gameState.inactivePlayerIndex]}
+          selectedShip={this.state.selectedShip}
+          hoveredCoordinates={this.state.hoveredCoordinates}
+          gameStage={this.state.gameStage}
         />
 
         <InteractiveBoard
-          handleSelection={this.getSelectedCoordinates}
+          handleSelection={this.onCoordinateSelection}
+          handleHover={this.onCoordinateHover}
           gameStage={this.state.gameStage}
-          selectedShip={this.state.selectedShip}
         />
 
       </div>
