@@ -19,6 +19,7 @@ export default class BattleshipEngine {
     // 0 = player 1, 1 = player 2
     this.activePlayerIndex = 0;
     this.inactivePlayerIndex = (this.activePlayerIndex === 0) ? 1 : 0;
+    this.message = '';
     this.gameOver = false;
     this.buildDataModel();
     this.updateExposedState();
@@ -78,6 +79,7 @@ export default class BattleshipEngine {
       currentTurn: this.currentTurn,
       activePlayerIndex: this.activePlayerIndex,
       inactivePlayerIndex: this.inactivePlayerIndex,
+      message: this.message,
       gameOver: this.gameOver
     };
   }
@@ -100,6 +102,14 @@ export default class BattleshipEngine {
     }
     return true;
   }
+  /**
+   * Proper way for interaction layer to commit actions of the game.
+   *
+   * @method action
+   *
+   * @param  {String} name - name of the action matching the private method to invoke.
+   * @param  {Object} args - arguments to be passed to the private method.
+   */
   action(name, args) {
     // console.log('no match found yet');
     // console.log(this.actions);
@@ -152,6 +162,8 @@ export default class BattleshipEngine {
         // Add coordinates to hits array.
         this.players[this.inactivePlayerIndex].hits.push(coordinates);
 
+        this.message = 'hit';
+
         // Up the damage counter
         ship.damage.count++;
 
@@ -162,6 +174,8 @@ export default class BattleshipEngine {
         }
       } else {
         this.players[this.inactivePlayerIndex].misses.push(coordinates);
+
+        this.message = 'miss';
       }
     }
   }
